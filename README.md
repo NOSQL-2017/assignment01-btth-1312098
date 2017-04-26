@@ -3,8 +3,8 @@
 **Bookstore** là một repository trong bài tập thực hành của lớp.
 
 Thành viên:
-* [ ] **MSSV1** Tên sinh viên 1 (tên tài khoản github)
-* [ ] **MSSV2** Tên sinh viên 2 (tên tài khoản github)
+* [ ] **1312098** Phùng Văn Dũng (dungvatoi12)
+
 
 URL: **Link github page**
 
@@ -13,27 +13,27 @@ URL: **Link github page**
 Sinh viên check vào các mục bên dưới và ghi mã sinh viên đã làm vào chức năng theo mẫu. Mục nào ko có MSSV là tính điểm theo nhóm. Cần sắp xếp các chức năng bên dưới theo thứ tự MSSV đã thực hiện.
 
 Yêu cầu **GIT**
-* [ ] Có sử dụng GIT.
+* [x] Có sử dụng GIT.
 * [ ] Sử dụng GIT theo Centralized Workflow.
 * [ ] Sử dụng GIT theo Feature Branch Workflow.
 * [ ] Sử dụng GIT theo Gitflow Workflow.
 
 Công nghệ sử dụng (tự động thêm nếu phần mình dùng không được liệt kê):
-* [ ] Nodejs
+* [x] Nodejs
 * [ ] Ruby on Rails
-* [ ] Postgresql
+* [x] Postgresql
 * [ ] Mongodb
 * [ ] Redis
 * [ ] Cassandra
 * [ ] Neo4j
-
+* [x] React + Redux
 Yêu cầu **bắt buộc**
-* [ ] Triển khai ứng dụng sử dụng docker compose và Dockerfile
-* [ ] Người dùng được phép đăng nhập để tiến hành mua sách
-* [ ] Người bán được phép đăng nhập vào hệ thống để quản lý sách mình muốn bán
-* [ ] Nhân viên hệ thống được phép đăng nhập để quản lý danh mục sản phẩm
-* [ ] Người dùng được phép xem lại các đơn hàng đã mua và trạng thái đơn hàng
-* [ ] Người bán được phép xem các đơn hàng đã đặt và cập nhật trạng thái đơn hàng (đã nhập, đã giao)
+* [x] Triển khai ứng dụng sử dụng docker compose và Dockerfile
+* [x] Người dùng được phép đăng nhập để tiến hành mua sách
+* [x] Người bán được phép đăng nhập vào hệ thống để quản lý sách mình muốn bán
+* [x] Nhân viên hệ thống được phép đăng nhập để quản lý danh mục sản phẩm
+* [x] Người dùng được phép xem lại các đơn hàng đã mua và trạng thái đơn hàng
+* [x] Người bán được phép xem các đơn hàng đã đặt và cập nhật trạng thái đơn hàng (đã nhập, đã giao)
 
 Yêu cầu **không bắt buộc**
 * [ ] Người dùng được phép sử dụng giỏ hàng

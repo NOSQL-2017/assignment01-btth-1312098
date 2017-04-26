@@ -1,0 +1,32 @@
+.signup, .login {
+        width: 30%;
+        margin: 50px auto;
+
+    
+        form .form-icons {
+        text-align: center;
+        }
+
+        form .form-icons h4 {
+            text-align: center;
+            font-size: 220%;
+            font-weight: 600;   
+            margin-bottom: 1rem;
+        }
+
+        form .form-icons .input-group-label {
+        background-color: #1779ba;
+        border-color: #1779ba;
+        }
+
+        form .form-icons .input-group-field {
+        border-color: #1779ba;
+        }
+
+        form .form-icons .fa {
+        color: white;
+        width: 1rem;
+        }
+
+
+}

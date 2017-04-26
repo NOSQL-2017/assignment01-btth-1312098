@@ -1,0 +1,15 @@
+@import "base/variables";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+// foundation
+// @import "base/foundation-settings";
+// @import "foundation";
+// @include foundation-everything;
+
+// components
+@import 'components/nav';
+@import 'components/home';
+@import 'components/product';
+@import 'components/menu';
+@import 'components/signup';
+@import 'components/productbuy.scss';
+@import 'components/sales';

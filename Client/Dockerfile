@@ -1,17 +1,18 @@
 FROM node:boron
 
 #Create app directory
-RUN mkdir -p /usr/src/doancuoiki/Client
-WORKDIR /usr/src/doancuoiki/Client
+RUN mkdir -p /usr/src/BTTH/Client
+WORKDIR /usr/src/BTTH/Client
 
 
 # Install app dependencies
-COPY package.json /usr/src/doancuoiki/Client
+COPY package.json /usr/src/BTTH/Client
 RUN npm install
 RUN npm install -g webpack@1.12.13 
+RUN npm install -g nodemon
 
 # Bundle app source
-COPY . /usr/src/doancuoiki/Client
+COPY . /usr/src/BTTH/Client
 
 EXPOSE 3000
-CMD npm rebuild node-sass && webpack && npm start
+CMD  webpack && npm start

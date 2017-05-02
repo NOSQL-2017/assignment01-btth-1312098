@@ -1,20 +1,36 @@
 var React = require('react');
+var {Link} = require('react-router');
+var {connect} = require('react-redux');
+var actions = require('actions');
+var DanhMuc = require('danhmuc');
 
 var menu = React.createClass({
-
+    componentWillMount: function() {
+        var { dispatch, danhmuc } = this.props;
+        dispatch(actions.layDanhMuc());
+    },
     render: function () {
+        var {danhmuc, dispatch} = this.props;
+        var hienThiDanhMuc = function() {
+            if (danhmuc.dsDanhMuc.length > 0) {
+                return danhmuc.dsDanhMuc.map( (danhmuccon, k) => {
+                    return <DanhMuc key={k} danhmuccon={danhmuccon} />
+                })
+            }
+        }
         return (
            <div className="menu">
                <div className="vertical-menu">
-                    <a href="#" className="active">Chủ đề sách</a>
-                    <a href="#">Khoa Học</a>
-                    <a href="#">Tiều thuyết</a>
-                    <a href="#">Trinh Thám</a>
-                    <a href="#">Ngôn Lù</a>
+                    <Link  className="active">Chủ đề sách</Link>
+                    {hienThiDanhMuc()}
                 </div>
            </div>
         )
     }
 });
 
-module.exports = menu;
+module.exports = connect(
+    state => {
+        return state;
+    }
+)(menu);

@@ -3,48 +3,64 @@ var express = require('express'),
 
 var db = require('../db');
 
-
 router.get('/', function(req, res) {
-    var tenDangNhap = req.query.tenDangNhap;
-    db.connect()
-        .then(obj => {
-            sco = obj;
-            return sco.any('SELECT username, tennguoidung, email  FROM USERS where username != $1', [tenDangNhap])
+    var tenDangNhap = req.query.tendangnhap;
+    db.any('SELECT tendangnhap, tennguoidung, email  FROM nguoidung where tendangnhap != $1', [tenDangNhap])
+        .then(function(data) {
+             res.send({message: 'Success', error: false, users: data});
         })
-        .then (data => {
-           res.send({message: 'Success', error: false, users: data});
-           obj.done();
-        })
-        .catch(error => {
-
-        })
+        .catch(function(error) {
+            // error;
+        });
 });
 
-router.post('/', function(req, res) {
-    if (!req.body.tenDangNhap) {
-        return res.json({
-            message: 'Ten dang nhap trong',
-            error: true
+router.get('/chucvu', function(req, res) {
+    var tenDangNhap = req.query.tendangnhap;
+     db.any('SELECT chucvu from nguoidung where tendangnhap=$1',[tenDangNhap])
+        .then(function(data) {
+             res.send({message: 'Success', error: false, chucvu: data});
         })
-    }
-    db.connect()
-        .then(obj => {
-            sco = obj;
-            return sco.any('SELECT count(username) as number FROM USERS WHERE username=$1',[req.body.tenDangNhap]);
-            
-        })
-        .then (data => {
-            //console.log(data[0].number);
+        .catch(function(error) {
+            // error;
+        });
+
+})
+
+router.post('/signup', function(req, res) {
+    db.any('SELECT count(tendangnhap) as number FROM nguoidung WHERE tendangnhap=$1',[req.body.tendangnhap])
+        .then(function(data) {
             if (data[0].number == '1')
                 res.send({message: 'failed', error: true})
             else if (data[0].number == '0') {
-                sco.any('INSERT INTO USERS(username, matkkhau, tennguoidung,email) values($1, $2, $3, $4)',[req.body.tenDangNhap, req.body.matKhau,req.body.hoTen, req.body.email]);
-                res.send({message: 'Success', error: false});
+                db.any('INSERT INTO nguoidung(tendangnhap, matkhau, tennguoidung, email, chucvu) values($1, $2, $3, $4, $5)',[req.body.tendangnhap, req.body.matkhau,req.body.hoten, req.body.email,req.body.chucvu])
+                    .then(function(data) {
+                        res.send({message: 'Success', error: false});
+                    })
+                    .catch(function(error) {
+                        // error;
+                    });            
             };
-            obj.done();
         })
-        .catch(error => {
-        // error
+        .catch(function(error) {
+            // error;
+        });
+});
+
+
+router.post('/login', function(req, res) {
+    var sco;
+    var kq = 0;
+     db.any('SELECT count(tendangnhap) as number FROM nguoidung WHERE tendangnhap=$1 and matkhau=$2',[req.body.tendangnhap, req.body.matkhau])
+        .then(function(data) {
+             if (data[0].number == '1')
+                res.send({message: 'Success', error: false})
+            else if (data[0].number == '0') {
+                res.send({message: 'Failed', error: true});
+            }
         })
+        .catch(function(error) {
+            // error;
+        });
+    
 });
 module.exports = router;

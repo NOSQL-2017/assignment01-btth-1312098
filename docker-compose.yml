@@ -1,28 +1,28 @@
 version: '3'
 services:
-  db:
+  db1:
     image: postgres
     ports:
       - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=123456
       - POSTGRES_USER=pvDung
-      - POSTGRES_DB=DoAnCuoiKi
-  web:
+      - POSTGRES_DB=BTTH
+  webth:
     build: ./Client
     ports:
       - "3000:3000"
     volumes:
-      - ./Client:/usr/src/doancuoiki/Client
+      - ./Client:/usr/src/BTTH/Client
     links: 
-      - webapi 
-  webapi:
+      - webapith
+  webapith:
     build: ./serverapi
     ports:
       - "8080:8080"
     volumes:
-      - ./serverapi:/usr/src/doancuoiki/serverapi
+      - ./serverapi:/usr/src/BTTH/serverapi
     links:
-      - db
+      - db1
     depends_on:
-      - db
+      - db1

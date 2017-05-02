@@ -1,62 +1,34 @@
 var React = require('react');
-
+var {connect} = require('react-redux');
+var actions = require('actions');
+var DetailProduct = require('detailproduct');
 
 var Product = React.createClass({
-
+    componentWillMount: function() {
+         var {dispatch, nguoiban} = this.props;
+         if (nguoiban.dsSachTL.length == 0) {
+            dispatch(actions.layDanhSachSachTL(0));
+         }
+    },
     render: function () {
+         var {dispatch, nguoiban} = this.props;
+
+        var hienThiSach = function() {
+            if (nguoiban.dsSachTL.length > 0) {
+                if (nguoiban.dsSachTL['0'].length > 0) {
+                     return nguoiban.dsSachTL['0'].map( (book, k) => {
+                        return <DetailProduct key={k} book={book} />
+                    })
+                }
+                
+            }
+            return <div className="column small-3 large-3"><h2>Chưa có sách nào được đăng bán cả.</h2></div>
+           
+        }
         return (
             <div className="Product">
                 <div className="row">
-                    <div className="column small-3 large-3 details">
-                        <div className="product-card">
-                            <div className="product-card-thumbnail">
-                                <a href="#"><img src="http://placehold.it/180x180" /></a>
-                            </div>
-                            <h2 className="product-card-title"><a href="#">Product Name</a></h2>
-                            <span className="product-card-desc">Product Description</span>
-                            <span className="product-card-price">$9.99</span><span className="product-card-sale">$12.99</span>
-                            <div className="product-card-colors">
-                                <button href="#" className="product-card-color-option"><img src="http://placehold.it/30x30" /></button>
-                                <button href="#" className="product-card-color-option"><img src="http://placehold.it/30x30" /></button>
-                                <button href="#" className="product-card-color-option"><img src="http://placehold.it/30x30" /></button>
-                                <button href="#" className="product-card-color-option"><img src="http://placehold.it/30x30" /></button>
-                            </div>
-                        </div>
-                    </div>
-
-                     <div className="column small-3 large-3 details">
-                        <div className="product-card">
-                            <div className="product-card-thumbnail">
-                                <a href="#"><img src="http://placehold.it/180x180" /></a>
-                            </div>
-                            <h2 className="product-card-title"><a href="#">Product Name</a></h2>
-                            <span className="product-card-desc">Product Description</span>
-                            <span className="product-card-price">$9.99</span><span className="product-card-sale">$12.99</span>
-                            <div className="product-card-colors">
-                                <button href="#" className="product-card-color-option"><img src="http://placehold.it/30x30" /></button>
-                                <button href="#" className="product-card-color-option"><img src="http://placehold.it/30x30" /></button>
-                                <button href="#" className="product-card-color-option"><img src="http://placehold.it/30x30" /></button>
-                                <button href="#" className="product-card-color-option"><img src="http://placehold.it/30x30" /></button>
-                            </div>
-                        </div>
-                    </div>
-
-                     <div className="column small-3 large-3 details">
-                        <div className="product-card">
-                            <div className="product-card-thumbnail">
-                                <a href="#"><img src="http://placehold.it/180x180" /></a>
-                            </div>
-                            <h2 className="product-card-title"><a href="#">Product Name</a></h2>
-                            <span className="product-card-desc">Product Description</span>
-                            <span className="product-card-price">$9.99</span><span className="product-card-sale">$12.99</span>
-                            <div className="product-card-colors">
-                                <button href="#" className="product-card-color-option"><img src="http://placehold.it/30x30" /></button>
-                                <button href="#" className="product-card-color-option"><img src="http://placehold.it/30x30" /></button>
-                                <button href="#" className="product-card-color-option"><img src="http://placehold.it/30x30" /></button>
-                                <button href="#" className="product-card-color-option"><img src="http://placehold.it/30x30" /></button>
-                            </div>
-                        </div>
-                    </div>
+                   {hienThiSach()}
                 </div>
             </div>
 
@@ -65,4 +37,8 @@ var Product = React.createClass({
     }
 });
 
-module.exports = Product;
+module.exports = connect(
+    state => {
+        return state;
+    }
+)(Product);

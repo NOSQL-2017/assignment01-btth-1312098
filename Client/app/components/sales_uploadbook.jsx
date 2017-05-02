@@ -7,96 +7,74 @@ var superagent = require('superagent');
 var Book = require('sales_book');
 
 var Sales_uploadbook = React.createClass({
-    getInitialState: function() {
-        return {
-            BookImages: []
-        }
-    },
     uploadFile: function (files) {
-
-        var { dispatch } = this.props;
-        
-        var images = files;
-
-        var cloudName = 'doancuoiki';
-        var url = 'https://api.cloudinary.com/v1_1/' + cloudName + '/image/upload';
-
-        var timestamp = Date.now() / 1000;
-        var uploadPreset = 'pvdung';
-
-        var paramsStr = 'timestamp=' + timestamp + '&upload_preset=' +
-            uploadPreset + 'e68qaWrrPTkhExBJsAW4ngQrQvw';
-        var signature = sha1(paramsStr);
-
-        var params = {
-            'api_key': '894259973189773',
-            'timestamp': timestamp,
-            'upload_preset': uploadPreset,
-            'signature': signature
-        }
-
-        var ListImages;
-        files.forEach(image => {
-            var uploadRequest = superagent.post(url);
-            uploadRequest.attach('file', image);
-
-            Object.keys(params).forEach((key) => {
-                uploadRequest.field(key, params[key])
-            });
-
-            uploadRequest.end((err, resp) => {
-                if (err) {
-                    alert(err, null);
-                    return;
-                }
-
-                var uploaded = resp.body;
-
-                var updatedImages = Object.assign([], this.state.BookImages);
-                updatedImages.push(uploaded);
-                this.setState({
-                    BookImages: updatedImages
-                })
-            })
-        })
-
-    },
-    handleSaveBook: function() {
-        var tensach = this.refs.tensach.value;
-        var gia = this.refs.gia.value;
-        console.log(tensach + ' ' + gia);
+        var { dispatch } = this.props;    
+        dispatch(actions.taiAnh(files));
     },
     componentWillReceiveProps: function (nextProps) {
-        console.log(nextProps);
+        
+    },
+    componentWillUnmount: function() {
+        var {dispatch} = this.props;
+        dispatch(actions.resetDsSachSH());
     },
     render: function () {
-        var { dispatch, ownerBook } = this.props;
-        var {BookImages} = this.state;
+        var { dispatch, nguoiban } = this.props;
+
         var renderBook  = () => {
-            if(BookImages.length === 0) {
+            if(nguoiban.danhSachAnh.length === 0) {
                 return ( <p>Nothing to show</p>)
             }
             return (
-                 BookImages.map((book, k) => {
-                    console.log(book);
-                    return  <Book key={k} {...book}/>
+                 nguoiban.danhSachAnh.map((book, k) => {
+    
+                    return  <Book key={k} url={book['0'].secure_url}/>
                 })
             )
         }
 
+        var thongBaoTaiAnh = () => {
+             if (nguoiban.xuLyTaiAnh == true) {
+                return (
+                    <div data-closable className="callout alert-callout-border radius">
+                        Đang tải ảnh lên........
+                    </div>
+                )
+            } else if (nguoiban.taiAnh == 1) {
+                return (
+                    <div data-closable className="callout alert-callout-border success">
+                        <strong>Thành công</strong> - Ảnh đã được tải lên.
+                        <button className="close-button" aria-label="Dismiss alert" type="button" data-close>
+                                <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                )
+            }
+        }
+
+
         return (
             <div className="uploadbook">
                 <div className="row">
-                    <div className="uploadimages column">
-                        <h3>Upload Images</h3>
-                        <Dropzone onDrop={this.uploadFile} className="dropzone">
-                            <button className="button radius">Bấm vào đây để tải ảnh sách lên</button>
-                        </Dropzone>
+                    <div className="row">
+                         <div className="uploadimages column">
+                            <h3>Upload Images</h3>
+                            <Dropzone onDrop={this.uploadFile} className="dropzone">
+                                <button className="button radius">Bấm vào đây để tải ảnh sách lên</button>
+                            </Dropzone>
+                        </div>
                     </div>
-                    <div>
-                        <button onClick={this.handleSaveBook} className="button radius">Lưu</button>
+                    <div className="row">
+                         <div className="message">
+                            {thongBaoTaiAnh()}
+                         </div>
                     </div>
-                    {renderBook()}
+
+                    <div className="row">
+                        {renderBook()}
+                    </div>
+  
+                    
                     
                 </div>
             </div>

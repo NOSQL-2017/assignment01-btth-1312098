@@ -3,6 +3,17 @@ var moment = require('moment');
 
 export var ownerBookReducer = (state ={danhSachAnh: [], xuLyLuuAnh: false,xuLyTaiAnh: false, taiAnh: 0, luuAnh: 0, layDSSach: false, dsSachTL: [],dsSachSH: []}, action) => {
     switch(action.type) {
+        case 'RESET_OWNER_BOOK': 
+            return {
+                ...state,
+                danhSachAnh: [], xuLyLuuAnh: false,
+                xuLyTaiAnh: false, 
+                taiAnh: 0, 
+                luuAnh: 0, 
+                layDSSach: false, 
+                dsSachTL: [],
+                dsSachSH: []
+            }
         case 'XU_LY_LUU_ANH': 
             return {
                 ...state,
@@ -63,12 +74,20 @@ export var ownerBookReducer = (state ={danhSachAnh: [], xuLyLuuAnh: false,xuLyTa
 
 export var usersReducer = (state = {isLogin: false,laydulieu: 0, dangky: 0, dangnhap: 0, tendangnhap: '', chucvu: ''},action) => {
     switch(action.type) {
-        case 'DAT_MAC_DINH': 
+        case  'RESET_FOR_LOGIN': 
             return {
                 ...state,
                 laydulieu: 0,
                 dangnhap: 0,
                 dangky: 0
+            }
+        case 'DAT_MAC_DINH_USER': 
+            return {
+                ...state,
+                laydulieu: 0,
+                dangnhap: 0,
+                dangky: 0,
+                isLogin: false
             }
         case 'LAY_DU_LIEU':
             return {
@@ -160,6 +179,12 @@ export var danhMucReducer = (state = {dsDanhMuc: []}, action) => {
 
 export var dathangReducer = (state = {dsDonDatHangKH: [], dsDonDatHangNB: []}, action) => {
     switch (action.type) {
+        case 'RESET_DAT_HANG':
+            return {
+                ...state,
+                dsDonDatHangKH: [], 
+                dsDonDatHangNB: []
+            }
         case 'DON_DAT_HANG_KH':
             return {
                 ...state,

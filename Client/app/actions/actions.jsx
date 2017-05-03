@@ -5,6 +5,11 @@ var axios = require('axios');
 
 //---- upload images book to server clouder ---- //
 
+export var resetOwnerBook = () => {
+    return {
+        type: 'RESET_OWNER_BOOK'
+    }
+}
 export var taiAnhThatBai = () => {
     return {
         type: 'TAI_ANH_THAT_BAI'
@@ -194,7 +199,12 @@ export var xoaSachTaiLen = (url) => {
 //---- users ---//
 export var reset = () => {
     return {
-        type: 'DAT_MAC_DINH'
+        type: 'RESET_FOR_LOGIN'
+    }
+}
+export var resetUser = () => {
+    return {
+        type: 'DAT_MAC_DINH_USER'
     }
 }
 export var laydulieu = () => {
@@ -295,6 +305,11 @@ export var layChucVu = (tendangnhap) => {
 }
 
 // ---- gio hang ---- //
+export var resetDatHang = () => {
+    return {
+        type: 'RESET_DAT_HANG'
+    }
+}
 
 export var themSachVaoGio = (sach) => {
     return {

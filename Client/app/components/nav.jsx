@@ -4,16 +4,20 @@ var {connect} = require('react-redux');
 var actions = require('actions');
 
 var nav = React.createClass({
-
+    handleLogOut: function() {
+        var {dispatch} = this.props;
+        dispatch(actions.resetUser());
+        dispatch(actions.resetOwnerBook());
+        dispatch(actions.resetDatHang())
+    },
     render: function() {
         var {nguoidung, dispatch} = this.props;
         console.log('nguoi dung', nguoidung);
+        var that = this;
         var chucnangDangNhap = function() {
             if (nguoidung.isLogin == true) {
                 return (
-                  <ul className="menu">  <li onClick={
-                    () => { dispatch(actions.reset())}
-                  }><Link to="/">Đăng xuất</Link></li> </ul>
+                  <ul className="menu"><li onClick={that.handleLogOut}><Link to="/">Đăng xuất</Link></li> </ul>
                 )
             } else {
                 return (

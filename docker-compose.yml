@@ -25,4 +25,5 @@ services:
     links:
       - db1
     depends_on:
-      - db1
+      - "db1"
+    command: ["./wait-for-it.sh", "db:5432", "--", "node server.js"]

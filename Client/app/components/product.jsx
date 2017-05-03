@@ -10,6 +10,12 @@ var Product = React.createClass({
             dispatch(actions.layDanhSachSachTL(0));
          }
     },
+    componentWillUpdate: function(nextProps, nextState) {
+        var {dispatch} = this.props;
+        if (nextProps.nguoiban.dsSachTL.length != this.props.nguoiban.dsSachTL.length) {
+            dispatch(actions.layDanhSachSachTL(0));
+        }
+    },
     render: function () {
          var {dispatch, nguoiban} = this.props;
 

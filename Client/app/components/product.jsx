@@ -10,20 +10,19 @@ var Product = React.createClass({
             dispatch(actions.layDanhSachSachTL(0));
          }
     },
-    componentWillUpdate: function(nextProps, nextState) {
-        var {dispatch} = this.props;
-        if (nextProps.nguoiban.dsSachTL.length != this.props.nguoiban.dsSachTL.length) {
-            dispatch(actions.layDanhSachSachTL(0));
-        }
-    },
     render: function () {
          var {dispatch, nguoiban} = this.props;
 
         var hienThiSach = function() {
             if (nguoiban.dsSachTL.length > 0) {
-                if (nguoiban.dsSachTL['0'].length > 0) {
-                     return nguoiban.dsSachTL['0'].map( (book, k) => {
-                        return <DetailProduct key={k} book={book} />
+                if (nguoiban.dsSachTL.length > 0) {
+                     return nguoiban.dsSachTL.map( (books, k) => {
+                         if (books.dsSach.length > 0) {
+                             return books.dsSach.map( (book, k) => {
+                                 return <DetailProduct key={k} book={book} />
+                             })
+                         }
+                       
                     })
                 }
                 

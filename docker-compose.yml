@@ -8,6 +8,10 @@ services:
       - POSTGRES_PASSWORD=123456
       - POSTGRES_USER=pvDung
       - POSTGRES_DB=BTTH
+  mgdb:
+    image: mongo
+    ports: 
+      - "27017:27017"
   webth:
     build: ./Client
     ports:
@@ -26,4 +30,16 @@ services:
       - db1
     depends_on:
       - "db1"
-    command: ["./wait-for-it.sh", "db:5432", "--", "node server.js"]
+      - "mgdb"
+    command: ["./wait-for-it.sh", "db1:5432","--", "node server.js"]
+  webmgdbth:
+    build: ./serverMongoDB
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./serverMongoDB:/usr/src/BTTH/serverMongoDB
+    links:
+      - mgdb
+    depends_on:
+      - "mgdb"
+    command: ["./wait-for-it.sh", "mgdb:27017","--", "node server.js"]

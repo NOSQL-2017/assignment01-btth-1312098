@@ -1,5 +1,6 @@
 var uuid = require('node-uuid');
 var moment = require('moment');
+var {browserHistory} = require('react-router');
 
 export var ownerBookReducer = (state ={danhSachAnh: [], xuLyLuuAnh: false,xuLyTaiAnh: false, taiAnh: 0, luuAnh: 0, layDSSach: false, dsSachTL: [],dsSachSH: []}, action) => {
     switch(action.type) {
@@ -55,24 +56,20 @@ export var ownerBookReducer = (state ={danhSachAnh: [], xuLyLuuAnh: false,xuLyTa
             return {
                 ...state,
                 layDSSach: false,
-                dsSachTL: [
-                    action.dsSach
-                ]
+                dsSachTL: action.dsSach
             }
         case 'LAY_DS_SACH_THEO_SH_TC':
             return {
                 ...state,
                 layDSSach: false,
-                dsSachSH: [
-                    action.dsSach
-                ]
+                dsSachSH: action.dsSach
             }
         default: 
             return state;
     }
 } 
 
-export var usersReducer = (state = {isLogin: false,laydulieu: 0, dangky: 0, dangnhap: 0, tendangnhap: '', chucvu: ''},action) => {
+export var usersReducer = (state = {session: !!sessionStorage.jwt, isLogin: false,laydulieu: 0, dangky: 0, dangnhap: 0, tendangnhap: '', chucvu: ''},action) => {
     switch(action.type) {
         case  'RESET_FOR_LOGIN': 
             return {
@@ -81,7 +78,8 @@ export var usersReducer = (state = {isLogin: false,laydulieu: 0, dangky: 0, dang
                 dangnhap: 0,
                 dangky: 0
             }
-        case 'DAT_MAC_DINH_USER': 
+        case 'DAT_MAC_DINH_USER':
+            sessionStorage.removeItem('jwt');
             return {
                 ...state,
                 laydulieu: 0,
@@ -95,6 +93,7 @@ export var usersReducer = (state = {isLogin: false,laydulieu: 0, dangky: 0, dang
                 laydulieu: 1
             }
         case 'DANG_KY_THANH_CONG':
+
             return {
                 ...state,
                 laydulieu: 0,

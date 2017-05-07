@@ -23,6 +23,14 @@ $(document).foundation();
 // App css
 require('style!css!sass!applicationStyles');
 
+function requireAuth(nextState, replace) {
+    if (!sessionStorage.jwt) {
+        replace({
+            pathname: '/dangnhap',
+            state: {nextPathname: nextState.location.pathname}
+        })
+    }
+}
 ReactDOM.render(
     <Provider store={store}>
         <Router history={browserHistory}>
@@ -30,7 +38,7 @@ ReactDOM.render(
                 <IndexRoute component={Home}/>
                <Route path="/dangky" component={Signup}/>
                <Route path="/dangnhap" component={Login}/>
-               <Route path="/giohang" component={ProductBuy}/>
+               <Route path="/giohang" component={ProductBuy} onEnter={requireAuth}/>
                <Route path="trangthaidh" component={TrangThaiDonHangKH}/>
                <Route path="/sales" component={Sales}>
                     <IndexRoute component={Sales_checkbook}/>

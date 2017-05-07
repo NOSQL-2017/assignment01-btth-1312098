@@ -1,5 +1,6 @@
-var express = require('express'),
-    router = express.Router();
+var express = require('express');
+var router = express.Router();
+var uuid = require('node-uuid');
 
 var db = require('../db');
 
@@ -45,11 +46,17 @@ router.post('/signup', function(req, res) {
             // error;
         });
 });
+router.get('/data', function(req, res) {
+    if (!req.session.user) {
+        return res.status(401).send();
+    }
+
+    return res.status(200).send("Welcome to super-secret API");
+})
 
 
 router.post('/login', function(req, res) {
-    var sco;
-    var kq = 0;
+
      db.any('SELECT count(tendangnhap) as number FROM nguoidung WHERE tendangnhap=$1 and matkhau=$2',[req.body.tendangnhap, req.body.matkhau])
         .then(function(data) {
              if (data[0].number == '1')

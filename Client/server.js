@@ -1,5 +1,9 @@
 var express = require('express');
 var path = require('path');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var session = require('express-session'); 
+
 var app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -11,7 +15,9 @@ app.use(function(req,res, next) {
         next();
     }
 });
-
+app.use(bodyParser.json());
+//app.use(cookieParser())
+//app.use(session({resave: true, saveUninitialized: true, secret: "sadfqwer"}));
 app.use(express.static(path.join(__dirname,'./public')));
 
 app.get('*', function (req, res) {

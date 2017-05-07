@@ -8,10 +8,17 @@ var danhmuc = React.createClass({
         var {dispatch,danhmuccon} = this.props;
         dispatch(actions.layDanhSachSachTL(danhmuccon.madanhmuc));
     },
+    handleClickAll: function(e) {
+        e.preventDefault()
+        dispatch(actions.layDanhSachSachTL(0));
+    },
     render: function() {
         var {dispatch, danhmuccon} = this.props;
         return (
-            <a href="" onClick={this.handleClick}>{danhmuccon.tendanhmuc}</a>
+            <div>
+                <a href="" onClick={this.handleClickAll}>Tất cả</a>
+                <a href="" onClick={this.handleClick}>{danhmuccon.tendanhmuc}</a>
+            </div>
         )
     }
 });

@@ -1,8 +1,10 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var pg = require('pg');
-
 var db = require('./db');
 
 
@@ -27,9 +29,9 @@ pool.connect(function (err, client, done) {
 
         client.query('CREATE TABLE IF NOT EXISTS nguoidung(tendangnhap VARCHAR(40) PRIMARY KEY,matkhau VARCHAR(40), tennguoidung VARCHAR(40), email VARCHAR(40), chucvu INT)');
         client.query('CREATE TABLE IF NOT EXISTS danhmucsach(madanhmuc VARCHAR(40) PRIMARY KEY,tendanhmuc VARCHAR(40))');
-        client.query('CREATE TABLE IF NOT EXISTS sach(masach serial PRIMARY KEY, url text, tensach VARCHAR(40), giatien float8, gioithieu VARCHAR(350), danhmuc VARCHAR(40), sohuu VARCHAR(40), '+ 
+        client.query('CREATE TABLE IF NOT EXISTS sach(masach VARCHAR(200) PRIMARY KEY, url text, tensach VARCHAR(40), giatien float8, gioithieu VARCHAR(350), danhmuc VARCHAR(40), sohuu VARCHAR(40), '+ 
                 ' CONSTRAINT sohuu_sach FOREIGN KEY (sohuu) REFERENCES nguoidung(tendangnhap) )');
-        client.query('CREATE TABLE IF NOT EXISTS giohang(giohang_id serial PRIMARY KEY, nguoimua VARCHAR(40), diachi VARCHAR(200) , masach INT,sohuu VARCHAR(40), giatien float8, trangthai INT,'
+        client.query('CREATE TABLE IF NOT EXISTS giohang(giohang_id serial PRIMARY KEY, nguoimua VARCHAR(40), diachi VARCHAR(200) , masach VARCHAR(200),sohuu VARCHAR(40), giatien float8, trangthai INT,'
             +   ' CONSTRAINT nguoimua_sach FOREIGN KEY (nguoimua) REFERENCES nguoidung(tendangnhap), '
             +   ' CONSTRAINT sach_dat FOREIGN KEY (masach) REFERENCES sach(masach) )');
 
@@ -46,6 +48,9 @@ pool.connect(function (err, client, done) {
 
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
+app.use(session({secret: "asdfxcv234sfeewq324recxv", resave: false, saveUninitialized: true}));
 
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');

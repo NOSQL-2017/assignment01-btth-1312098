@@ -19,8 +19,11 @@
   "dependencies": {
     "axios": "^0.15.3",
     "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.15.2",
+    "express-session": "^1.15.2",
     "mongoose": "^4.9.5",
+    "morgan": "^1.8.1",
     "path": "^0.12.7",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
@@ -30,6 +33,7 @@
     "react-router-redux": "^4.0.8",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
+    "serve-favicon": "^2.4.2",
     "sha1": "^1.1.1",
     "superagent": "^3.5.2",
     "webpack-dev-server": "^1.16.4"

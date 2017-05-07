@@ -2,6 +2,8 @@ var axios = require('react');
 var sha1 = require('sha1');
 var superagent = require('superagent')
 var axios = require('axios');
+var sessionApi = require('sessionApi');
+var uuid = require('node-uuid');
 
 //---- upload images book to server clouder ---- //
 
@@ -97,8 +99,25 @@ export var taiAnh = (files) => {
 export var saveBook = (tensach,giatien,gioithieu,url,danhmuc,sohuu) => {
     return (dispatch, getState) => {
         dispatch(xuLyLuuAnh());
-
+        var masach = uuid();
         axios.post('http://localhost:8080/api/sach', {
+            masach,
+            url,
+            tensach,
+            gioithieu,
+            giatien,
+            sohuu
+        }).then(function (res) {
+            if (res.data.error == false) {
+                dispatch(luuAnhThanhCong());
+            } else {
+                console.log('failed');
+                dispatch(luuAnhThatBai());
+            }
+        })
+
+        axios.post('http://localhost:8081/api/sach', {
+            masach,
             url,
             tensach,
             gioithieu,
@@ -107,10 +126,8 @@ export var saveBook = (tensach,giatien,gioithieu,url,danhmuc,sohuu) => {
             sohuu
         }).then(function (res) {
             if (res.data.error == false) {
-                dispatch(luuAnhThanhCong());
             } else {
                 console.log('failed');
-                dispatch(luuAnhThatBai());
             }
         })
     }
@@ -133,7 +150,7 @@ export var layDanhSachSachTL = (danhmuc) => {
     return (dispatch, getState) => {
         dispatch(bdLayDSSach());
 
-        axios.get('http://localhost:8080/api/sach/danhmuc', {
+        axios.get('http://localhost:8081/api/sach/danhmuc', {
            params: {
                 danhmuc
            }
@@ -162,7 +179,7 @@ export var layDanhSachSachSH = (sohuu) => {
     return (dispatch, getState) => {
         dispatch(bdLayDSSach());
 
-        axios.get('http://localhost:8080/api/sach/sohuu', {
+        axios.get('http://localhost:8081/api/sach/sohuu', {
            params: {
                 sohuu
            }
@@ -190,9 +207,6 @@ export var xoaSachTaiLen = (url) => {
         url
     }
 }
-
-
-
 
 
 
@@ -269,6 +283,12 @@ export var dangnhap = (tendangnhap, matkhau) => {
             matkhau,
         }).then(function (res) {
             if (res.data.error == false) {
+                 var jwt = {
+                    tendangnhap,
+                    matkhau
+                }
+                sessionStorage.setItem('jwt', jwt);
+
                 dispatch(dangnhapthanhcong(tendangnhap));
             } else {
                 console.log('failed');
@@ -294,7 +314,6 @@ export var layChucVu = (tendangnhap) => {
             }
         }).then(function (res) {
             if (res.data.error == false) {
-                console.log('actions',res.data.chucvu)
                 dispatch(layChucVuTc(res.data.chucvu['0'].chucvu));
             } else {
                 console.log('failed');
@@ -408,7 +427,7 @@ export var layDanhMucTC = (dsDanhMuc) => {
 export var layDanhMuc = () => {
     return (dispatch, getState) => {
 
-         axios.get('http://localhost:8080/api/danhmuc')
+         axios.get('http://localhost:8081/api/danhmuc')
          .then(function(res) {
             if (res.data.error == false) {
                 dispatch(layDanhMucTC(res.data.dsDanhMuc));
@@ -419,7 +438,7 @@ export var layDanhMuc = () => {
 
 export var xoaDanhMuc = (madanhmuc) => {
     return (dispatch, getState) => {
-         axios.delete('http://localhost:8080/api/danhmuc',{
+         axios.delete('http://localhost:8081/api/danhmuc',{
              params: {
                  madanhmuc
              }
@@ -434,7 +453,7 @@ export var xoaDanhMuc = (madanhmuc) => {
 
 export var themDanhMuc = (madanhmuc,tendanhmuc) => {
     return (dispatch, getState) => {
-         axios.post('http://localhost:8080/api/danhmuc',{
+         axios.post('http://localhost:8081/api/danhmuc',{
                  madanhmuc,
                  tendanhmuc
          })

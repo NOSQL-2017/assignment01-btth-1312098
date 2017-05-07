@@ -19,20 +19,24 @@ var Sales_checkbook = React.createClass({
                     </div>
                 )
             }
-            return nguoiban.dsSachSH['0'].map((sach, k) => {
-                return (
-                    <div className="column small-3 large-3 details" key={k}>
-                        <div className="product-card">
-                            <div className="product-card-thumbnail">
-                                <a href="#"><img src={sach.url} /></a>
-                            </div>
-                            <h2 className="product-card-title"><a href="#">{sach.tensach}</a></h2>
-                            <span className="product-card-desc">{sach.gioithieu}</span>
-                            <span className="product-card-price">{sach.giatien} VND</span>
+            return nguoiban.dsSachSH.map((ds, k) => {
+                if (ds.dsSach.length > 0) {
+                    return ds.dsSach.map( (sach, k) => {
+                        return (
+                            <div className="column small-3 large-3 details" key={k}>
+                                <div className="product-card">
+                                    <div className="product-card-thumbnail">
+                                        <a href="#"><img src={sach.url} /></a>
+                                    </div>
+                                    <h2 className="product-card-title"><a href="#">{sach.tensach}</a></h2>
+                                    <span className="product-card-desc">{sach.gioithieu}</span>
+                                    <span className="product-card-price">{sach.giatien} VND</span>
 
-                        </div>
-                    </div>
-                )
+                                </div>
+                            </div>
+                        )
+                    })
+                }
             })
         }
         return (

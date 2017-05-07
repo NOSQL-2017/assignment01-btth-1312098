@@ -12,7 +12,7 @@ var Book = React.createClass({
     componentWillMount: function() {
         var {dispatch, url, nguoiban} = this.props;
         dispatch(actions.layDanhMuc());
-        nguoiban.dsSachSH['0'].forEach(function(e) {
+        nguoiban.dsSachSH.forEach(function(e) {
             if (e.url === url) {
                 this.setState({
                     btnSave: true

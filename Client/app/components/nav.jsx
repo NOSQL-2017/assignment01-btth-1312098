@@ -12,7 +12,6 @@ var nav = React.createClass({
     },
     render: function() {
         var {nguoidung, dispatch} = this.props;
-        console.log('nguoi dung', nguoidung);
         var that = this;
         var chucnangDangNhap = function() {
             if (nguoidung.isLogin == true) {

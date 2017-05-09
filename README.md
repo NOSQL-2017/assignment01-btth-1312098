@@ -3,7 +3,7 @@
 **Bookstore** là một repository trong bài tập thực hành của lớp.
 
 Thành viên:
-* [ ] **1312098** Phùng Văn Dũng (dungvatoi12)
+* [x] **1312098** Phùng Văn Dũng (dungvatoi12)
 
 
 URL: **Link github page**
@@ -27,6 +27,7 @@ Công nghệ sử dụng (tự động thêm nếu phần mình dùng không đ�
 * [x] Cassandra
 * [ ] Neo4j
 * [x] React + Redux
+
 Yêu cầu **bắt buộc**
 * [x] Triển khai ứng dụng sử dụng docker compose và Dockerfile
 * [x] Người dùng được phép đăng nhập để tiến hành mua sách

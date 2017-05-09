@@ -8,9 +8,10 @@ var uriString =  'mongodb://mgdb:27017';
 
 
 mongoose.connect(uriString, function(err) {
-    if (err) {
-        console.log("error", err);
-    }
+    // if (err) {
+    //     console.log("error", err);
+    // }
+});
 
 
     router.get('/', function(req, res) {
@@ -42,7 +43,6 @@ mongoose.connect(uriString, function(err) {
     router.post('/', function(req, res) {
         var madanhmuc = req.body.madanhmuc;
         var tendanhmuc = req.body.tendanhmuc;
-
         var dm = new danhMuc({
             madanhmuc: madanhmuc,
             tendanhmuc: tendanhmuc
@@ -52,12 +52,10 @@ mongoose.connect(uriString, function(err) {
             if (err) {
                 console.log("them danh muc khong thanh cong");
             } else {
-                console.log("Them tc danh muc: ", newDanhMuc);
                 res.send({message: 'Success', error: false});
             }
         })
     });
-});
 
 
 module.exports = router;

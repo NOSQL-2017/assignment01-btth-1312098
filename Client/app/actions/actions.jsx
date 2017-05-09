@@ -99,7 +99,12 @@ export var taiAnh = (files) => {
 export var saveBook = (tensach,giatien,gioithieu,url,danhmuc,sohuu) => {
     return (dispatch, getState) => {
         dispatch(xuLyLuuAnh());
-        var masach = uuid();
+        var masach_1 = uuid();
+        var masach_2 = masach_1.split('-');
+        var masach = '';
+        for (var i = 0; i < masach_2.length; i++) {
+            masach = masach + masach_2[i];
+        }
         axios.post('http://localhost:8080/api/sach', {
             masach,
             url,
@@ -360,7 +365,7 @@ export var datSach = (dsSach,diachi) => {
     return (dispatch, getState) => {
         dispatch(batDauThanhToan());
 
-        axios.post('http://localhost:8080/api/giohang', {
+        axios.post('http://localhost:8082/api/giohang', {
             dsSach,
             diachi
         }).then(function(res) {
@@ -381,12 +386,13 @@ export var layTrangThaiDHKHTC = (dsDaDat) => {
 export var kiemTraTrangThaiSachKH = (tendangnhap) => {
     return (dispatch, getState) => {
         
-        axios.get('http://localhost:8080/api/giohang/nguoimua', {
+        axios.get('http://localhost:8082/api/giohang/nguoimua', {
             params: {
                 tendangnhap
             }
         }).then( (res) => {
             if (res.data.error == false) {
+                console.log('gio hang kh: ', res.data.dsDaDat);
                 dispatch(layTrangThaiDHKHTC(res.data.dsDaDat))
             }
         })
@@ -401,12 +407,13 @@ export var layDsDonDatHangTC = (dsDonDatHang) => {
 }
 export var layDsDonDatHang = (tendangnhap) => {
     return (dispatch, getState) => {
-        axios.get('http://localhost:8080/api/giohang/nguoiban',{
+        axios.get('http://localhost:8082/api/giohang/nguoiban',{
             params: {
                 tendangnhap
             }
         }).then( res => {
             if (res.data.error == false) {
+                console.log('nguoi ban: ', res.data.dsDonDatHang);
                 dispatch(layDsDonDatHangTC(res.data.dsDonDatHang))
             }
         })
@@ -430,6 +437,7 @@ export var layDanhMuc = () => {
          axios.get('http://localhost:8081/api/danhmuc')
          .then(function(res) {
             if (res.data.error == false) {
+                console.log(res.data.dsDanhMuc);
                 dispatch(layDanhMucTC(res.data.dsDanhMuc));
             }
         })
@@ -459,6 +467,7 @@ export var themDanhMuc = (madanhmuc,tendanhmuc) => {
          })
          .then(function(res) {
             if (res.data.error == false) {
+                console.log('them thanh cong');
                 dispatch(layDanhMuc());
             }
         })

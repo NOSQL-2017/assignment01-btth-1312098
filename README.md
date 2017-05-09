@@ -22,9 +22,9 @@ Công nghệ sử dụng (tự động thêm nếu phần mình dùng không đ�
 * [x] Nodejs
 * [ ] Ruby on Rails
 * [x] Postgresql
-* [ ] Mongodb
+* [x] Mongodb
 * [ ] Redis
-* [ ] Cassandra
+* [x] Cassandra
 * [ ] Neo4j
 * [x] React + Redux
 Yêu cầu **bắt buộc**
@@ -38,13 +38,15 @@ Yêu cầu **bắt buộc**
 Yêu cầu **không bắt buộc**
 * [ ] Người dùng được phép sử dụng giỏ hàng
 * [ ] Quản lý session trong 1 CSDL riêng bằng redis
-* [ ] Quản lý danh mục sản phẩm trong 1 CSDL riêng bằng MongoDB
-* [ ] Quản lý giỏ hàng trong 1 CSDL riêng bằng Cassandra
+* [x] Quản lý danh mục sản phẩm trong 1 CSDL riêng bằng MongoDB
+* [x] Quản lý giỏ hàng trong 1 CSDL riêng bằng Cassandra
 * [ ] Quản lý người mua và người bán follow, gửi tin nhắn với nhau và lưu trong CSDL riêng bằng Neo4j
 
 Các **chức năng của demo** đã thực hiện hoặc dự kiến thực hiện. Nhóm check vào các chức năng đã làm
 * [ ] Chức năng 1
 * [ ] Chức năng 2
+
+Lưu ý khi chạy code: Vì em set code khởi tạo Bảng của Cassandra sau 180s nên phải đợi thông báo kết nối Cassandra thành công thì mơi thực hiện được với gio hàng.
 
 ## Demo
 

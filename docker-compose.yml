@@ -12,6 +12,10 @@ services:
     image: mongo
     ports: 
       - "27017:27017"
+  cassandradb:
+    image: cassandra
+    ports: 
+      - "9042:9042"
   webth:
     build: ./Client
     ports:
@@ -30,7 +34,6 @@ services:
       - db1
     depends_on:
       - "db1"
-      - "mgdb"
     command: ["./wait-for-it.sh", "db1:5432","--", "node server.js"]
   webmgdbth:
     build: ./serverMongoDB
@@ -43,3 +46,13 @@ services:
     depends_on:
       - "mgdb"
     command: ["./wait-for-it.sh", "mgdb:27017","--", "node server.js"]
+  webcsdradb:
+    build: ./serverCassandra
+    ports:
+      - "8082:8082"
+    volumes:
+      - ./serverCassandra:/usr/src/BTTH/serverCassandra
+    links:
+      - cassandradb
+    depends_on:
+      - "cassandradb"

@@ -9,6 +9,7 @@ var HandleState = React.createClass({
             tenSach: '',
             url: '',
             gioithieu: '',
+            giatien: '',
             xuly: false
         }
     },
@@ -24,15 +25,18 @@ var HandleState = React.createClass({
                 this.setState({
                     tenSach: res.data.Sach['0'].tensach,
                     url: res.data.Sach['0'].url,
-                    gioithieu: res.data.Sach['0'].gioithieu
+                    gioithieu: res.data.Sach['0'].gioithieu,
+                    giatien: res.data.Sach['0'].giatien
                 })
             }
         }.bind(this))
     },
     handleClick: function() {
-        var {dispatch, donhang} = this.props;
-        axios.post('http://localhost:8080/api/giohang/xuly', {
-            id: donhang.giohang_id
+        var {dispatch, donhang, nguoidung} = this.props;
+        axios.post('http://localhost:8082/api/giohang/xuly', {
+            id: donhang.giohang_id,
+            nguoimua: donhang.nguoimua,
+            sohuu: nguoidung.tendangnhap
         }).then( function(res) {
             if (res.data.error == false) {
                 this.setState({
@@ -43,7 +47,7 @@ var HandleState = React.createClass({
     },
     render: function() {
         var {donhang, dispatch} = this.props;
-        var { tenSach , url, gioithieu, xuly} = this.state;
+        var { tenSach , url, gioithieu, xuly, giatien} = this.state;
         var that = this;
         var hienThiButton = function() {
             if (donhang.trangthai == 0 && xuly == false) {
@@ -81,7 +85,7 @@ var HandleState = React.createClass({
                             </div>
 
                             <div className="small-12 medium-3 columns travel-feature-card-price">
-                                <h6>{donhang.giatien} VND</h6>
+                                <h6>{giatien} VND</h6>
                                 {hienThiButton()}
                             </div>
                         </div>

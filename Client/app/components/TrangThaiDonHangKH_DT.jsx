@@ -8,7 +8,8 @@ var DonHang_DT = React.createClass({
         return {
             tenSach: '',
             url: '',
-            gioithieu: ''
+            gioithieu: '',
+            giatien: ''
         }
     },
     componentWillMount: function () {
@@ -23,7 +24,8 @@ var DonHang_DT = React.createClass({
                 this.setState({
                     tenSach: res.data.Sach['0'].tensach,
                     url: res.data.Sach['0'].url,
-                    gioithieu: res.data.Sach['0'].gioithieu
+                    gioithieu: res.data.Sach['0'].gioithieu,
+                    giatien: res.data.Sach['0'].giatien
                 })
             }
         }.bind(this))
@@ -31,7 +33,7 @@ var DonHang_DT = React.createClass({
     render: function () {
 
         var { donhang, dispatch } = this.props;
-        var { tenSach , url, gioithieu} = this.state;
+        var { tenSach , url, gioithieu, giatien} = this.state;
 
         return (
             <div>
@@ -60,7 +62,7 @@ var DonHang_DT = React.createClass({
                             </div>
 
                             <div className="small-12 medium-3 columns travel-feature-card-price">
-                                <h6>{donhang.giatien} VND</h6>
+                                <h6>{giatien} VND</h6>
                                 <p className="travel-feature-card-price-subtext">{donhang.trangthai == 0 ? <strong>Đang xử lý</strong> : <strong>Đã giao</strong>}</p>
                             </div>
                         </div>

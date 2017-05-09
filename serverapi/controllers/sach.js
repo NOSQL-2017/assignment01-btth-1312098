@@ -58,7 +58,7 @@ var db = require('../db');
         
           db.any('INSERT INTO sach(masach, url, tensach, giatien, gioithieu, danhmuc , sohuu ) values($1, $2, $3, $4, $5, $6,$7)',[req.body.masach,req.body.url, req.body.tensach,req.body.giatien,req.body.gioithieu, null,req.body.sohuu])
             .then(function(data) {
-                //res.send({message: 'Success', error: false});
+                res.send({message: 'Success', error: false});
             })
             .catch(function(error) {
                 // error;

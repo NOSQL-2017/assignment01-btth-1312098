@@ -8,9 +8,10 @@ var danhMuc = require('../models/danhmuc');
 
 var uriString =  'mongodb://mgdb:27017';
 mongoose.connect(uriString, function(err) {
-    if (err) {
-        console.log("error", err);
-    }
+    // if (err) {
+    //     console.log("error", err);
+    // }
+});
         
     router.get('/', function(req, res) {
         var masach = req.query.masach;
@@ -26,11 +27,9 @@ mongoose.connect(uriString, function(err) {
 
     router.get('/danhmuc', function(req, res) {
         var danhmuc = req.query.danhmuc;
-        console.log('danhmuc', danhmuc);
         if (danhmuc == 0) {
             danhMuc.find({}, function(err, Sach) {
             if (err) {
-                console.log(Sach);
                 res.send({message: 'Failed', error: true});
             } else {
                 res.send({message: 'Success', error: false, Sach: Sach});
@@ -39,7 +38,6 @@ mongoose.connect(uriString, function(err) {
         } else {
             danhMuc.find({ "madanhmuc": danhmuc}, function(err, Sach) {
             if (err) {
-                console.log(Sach);
                 res.send({message: 'Failed', error: true});
             } else {
                 res.send({message: 'Success', error: false, Sach: Sach});
@@ -88,7 +86,6 @@ mongoose.connect(uriString, function(err) {
             
         )
     });
-});
 
 
 module.exports = router;

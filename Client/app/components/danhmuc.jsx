@@ -9,7 +9,8 @@ var danhmuc = React.createClass({
         dispatch(actions.layDanhSachSachTL(danhmuccon.madanhmuc));
     },
     handleClickAll: function(e) {
-        e.preventDefault()
+        e.preventDefault();
+        var {dispatch} = this.props;
         dispatch(actions.layDanhSachSachTL(0));
     },
     render: function() {

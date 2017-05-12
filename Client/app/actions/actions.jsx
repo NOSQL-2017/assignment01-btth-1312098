@@ -256,7 +256,7 @@ export var dangky = (tendangnhap, hoten, email, matkhau, chucvu) => {
             chucvu
         }).then(function (res) {
             if (res.data.error == false) { 
-                taoNodeUser(tendangnhap);
+                dispatch(taoNodeUser(tendangnhap));
                 dispatch(dangkythanhcong(tendangnhap));
             } else {
                 console.log('failed');
@@ -542,14 +542,15 @@ export var layDsTheoDoiTc = (dsTheoDoi) => {
 export var layDsTheoDoi = (username) => {
 
     return (dispatch, getState) => {
-        axios.get('http://localhost:8083/api/message/createuser', {
+        axios.get('http://localhost:8083/api/message/getfollowing', {
             params: {
                 username
             }
         }).then(function(res) {
             if (res.data.error == false) {
-                dispatch(layDsTheoDoiTC(res.data.dsTheoDoi))
+                dispatch(layDsTheoDoiTc(res.data.dsTheoDoi))
             }
         })
     }
 }
+

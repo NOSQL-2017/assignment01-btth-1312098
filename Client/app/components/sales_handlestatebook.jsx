@@ -16,7 +16,7 @@ var HandleState = React.createClass({
     },
     componentWillMount: function () {
         var { donhang, dispatch, nguoidung } = this.props;
-        
+        var that = this;
         axios.get('http://localhost:8080/api/sach', {
             params: {
                 masach: donhang.masach
@@ -32,15 +32,15 @@ var HandleState = React.createClass({
             }
         }.bind(this))
 
-        axios.get('http://localhost:8083/api/message/checkFollowing', {
+        axios.get('http://localhost:8083/api/message/checkfollowing', {
             params: {
                 username: nguoidung.tendangnhap,
                 otherusername: donhang.nguoimua
             }
         }).then( function(res) {
             if (res.data.error == false) {
-                this.setState({
-                    xuly: true
+                that.setState({
+                    follow: true
                 })
             } 
         })
@@ -61,12 +61,13 @@ var HandleState = React.createClass({
     },
     handleFollow: function() {
         var {nguoidung, donhang} = this.props;
+        var that = this;
          axios.post('http://localhost:8083/api/message/follow', {
             username: nguoidung.tendangnhap,
             otherusername: donhang.nguoimua
         }).then(function(res) {
             if(res.data.error == false) {
-               this.setState({
+               that.setState({
                    follow: true
                })
             }
@@ -74,6 +75,7 @@ var HandleState = React.createClass({
     },
     handleUnFollow: function() {
         var {nguoidung, donhang} = this.props;
+        var that = this;
         axios.delete('http://localhost:8083/api/message/unfollow', {
             params: {
                username: nguoidung.tendangnhap,
@@ -81,7 +83,7 @@ var HandleState = React.createClass({
             }
         }).then(function(res) {
             if(res.data.error == false) {
-                this.setState({
+                that.setState({
                     follow: false
                 })
             }
@@ -93,9 +95,9 @@ var HandleState = React.createClass({
         var that = this;
         var hienThiFollow = function() {
             if (follow == false ) {
-                <button className="button" onClick={that.handleFollow}>Theo dõi</button>
+                return <button className="button" onClick={that.handleFollow}>Theo dõi</button>
             } else {
-                <button className="button" onClick={that.handleUnFollow}>Hủy theo dõi</button>
+                return <button className="button" onClick={that.handleUnFollow}>Hủy theo dõi</button>
             }
         }
         var hienThiButton = function() {
@@ -135,7 +137,8 @@ var HandleState = React.createClass({
 
                             <div className="small-12 medium-3 columns travel-feature-card-price">
                                 <h6>{giatien} VND</h6>
-                                {hienThiButton()}
+                                {hienThiButton()} 
+                                {hienThiFollow()}
                             </div>
                         </div>
                     </div>

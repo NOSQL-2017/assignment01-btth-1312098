@@ -9,6 +9,11 @@ var menu = React.createClass({
         var { dispatch, danhmuc } = this.props;
         dispatch(actions.layDanhMuc());
     },
+    handleClickAll: function(e) {
+        e.preventDefault();
+        var {dispatch} = this.props;
+        dispatch(actions.layDanhSachSachTL(0));
+    },
     render: function () {
         var {danhmuc, dispatch} = this.props;
         var hienThiDanhMuc = function() {
@@ -22,6 +27,7 @@ var menu = React.createClass({
            <div className="menu">
                <div className="vertical-menu">
                     <Link  className="active">Chủ đề sách</Link>
+                    <a href="" onClick={this.handleClickAll}>Tất cả</a>
                     {hienThiDanhMuc()}
                 </div>
            </div>

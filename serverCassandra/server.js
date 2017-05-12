@@ -49,17 +49,15 @@ waitForCass.await(config, 220000, true)
     })
 
 
-
-
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(session({ secret: "asdfx435feewq324recxv", resave: false, saveUninitialized: true }));
+app.use(session({secret: "asdfx435feesdafwq324recxv", resave: false, saveUninitialized: true}));
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Headers','Content-Type');
 
     next();
 });

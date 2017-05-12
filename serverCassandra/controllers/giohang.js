@@ -33,7 +33,7 @@ router.get('/nguoiban', function (req, res) {
 })
 
 
-var upsertGioHang = 'INSERT INTO bookstore.giohang(giohang_id,nguoimua,sohuu,diachi,masach,trangthai) values (?, ?, ?,?,?,?,?)'
+var upsertGioHang = 'INSERT INTO bookstore.giohang(giohang_id,nguoimua,sohuu,diachi,masach,trangthai) values (?, ?, ?,?,?,?)'
 router.post('/', function (req, res) {
     var dsSach = req.body.dsSach;
     var diachi = req.body.diachi;
@@ -48,6 +48,7 @@ router.post('/', function (req, res) {
 
         client.execute(upsertGioHang,[id_3,sach.nguoimua, sach.sohuu,diachi,sach.masach,trangthai ], function(err, result) {
             if(err) {
+                console.log(err);
                 res.status(404).send({message: err});
             } else {
                 res.send({ message: 'Success', error: false });

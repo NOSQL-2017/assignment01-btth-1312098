@@ -1,67 +1,67 @@
 version: '3'
 services:
-  # db1:
-  #   image: postgres
-  #   ports:
-  #     - "5432:5432"
-  #   environment:
-  #     - POSTGRES_PASSWORD=123456
-  #     - POSTGRES_USER=pvDung
-  #     - POSTGRES_DB=BTTH
-  # mgdb:
-  #   image: mongo
-  #   ports: 
-  #     - "27017:27017"
-  # cassandradb:
-  #   image: cassandra
-  #   ports: 
-  #     - "9042:9042"
+  db1:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_USER=pvDung
+      - POSTGRES_DB=BTTH
+  mgdb:
+    image: mongo
+    ports: 
+      - "27017:27017"
+  cassandradb:
+    image: cassandra
+    ports: 
+      - "9042:9042"
   neodb:
     image: neo4j:2.3
     ports: 
       - "7474:7474"
     environment:
       - NEO4J_AUTH=none
-  # webth:
-  #   build: ./Client
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - ./Client:/usr/src/BTTH/Client
-  #   links: 
-  #     - webapith
-  # webapith:
-  #   build: ./serverapi
-  #   ports:
-  #     - "8080:8080"
-  #   volumes:
-  #     - ./serverapi:/usr/src/BTTH/serverapi
-  #   links:
-  #     - db1
-  #   depends_on:
-  #     - "db1"
-  #   command: ["./wait-for-it.sh", "db1:5432","--", "node server.js"]
-  # webmgdbth:
-  #   build: ./serverMongoDB
-  #   ports:
-  #     - "8081:8081"
-  #   volumes:
-  #     - ./serverMongoDB:/usr/src/BTTH/serverMongoDB
-  #   links:
-  #     - mgdb
-  #   depends_on:
-  #     - "mgdb"
-  #   command: ["./wait-for-it.sh", "mgdb:27017","--", "node server.js"]
-  # webcsdradb:
-  #   build: ./serverCassandra
-  #   ports:
-  #     - "8082:8082"
-  #   volumes:
-  #     - ./serverCassandra:/usr/src/BTTH/serverCassandra
-  #   links:
-  #     - cassandradb
-  #   depends_on:
-  #     - "cassandradb"
+  webth:
+    build: ./Client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./Client:/usr/src/BTTH/Client
+    links: 
+      - webapith
+  webapith:
+    build: ./serverapi
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./serverapi:/usr/src/BTTH/serverapi
+    links:
+      - db1
+    depends_on:
+      - "db1"
+    command: ["./wait-for-it.sh", "db1:5432","--", "node server.js"]
+  webmgdbth:
+    build: ./serverMongoDB
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./serverMongoDB:/usr/src/BTTH/serverMongoDB
+    links:
+      - mgdb
+    depends_on:
+      - "mgdb"
+    command: ["./wait-for-it.sh", "mgdb:27017","--", "node server.js"]
+  webcsdradb:
+    build: ./serverCassandra
+    ports:
+      - "8082:8082"
+    volumes:
+      - ./serverCassandra:/usr/src/BTTH/serverCassandra
+    links:
+      - cassandradb
+    depends_on:
+      - "cassandradb"
   webneodb: 
     build: ./serverNeo4j
     ports:

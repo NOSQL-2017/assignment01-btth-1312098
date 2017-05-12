@@ -8,7 +8,7 @@ router.get('/getfollowing', function (req, res) {
      var query ='MATCH (user:User {username: {thisUsername}})-[rel:follows]->(other:User) RETURN other, COUNT(rel)';
 
     var params = {
-        thisUsername: "dungvatoi1237"
+        thisUsername: req.query.username
     };
 
     var user = this;
@@ -22,9 +22,7 @@ router.get('/getfollowing', function (req, res) {
         var others = [];
 
         for (var i = 0; i < results.length; i++) {
-          
 
-           
             following.push(results[i]['other']);
             
         }
@@ -35,12 +33,39 @@ router.get('/getfollowing', function (req, res) {
  
 })
 
+router.get('/checkfollowing', function (req, res) {
+     var query ='MATCH (user:User {username: {thisUsername}})-[rel:follows]->(other:User {username: {otherUsername}}) RETURN COUNT(rel)';
+
+    var params = {
+        thisUsername: req.query.username,
+        otherUsername: req.query.otherusername
+    };
+
+    db.cypher({
+        query: query,
+        params: params,
+    }, function (err, results) {
+        if (err) return callback(err);
+
+        var following = [];
+        var others = [];        
+        if (results['0']["COUNT(rel)"] == 0) {
+            res.send({message: "Failed", error: true});
+        } else {
+            res.send({message: "Sucess", error: false})
+        }
+
+        //callback(null, following, others);
+    });
+ 
+})
+
 router.delete('/unfollow', function (req, res) {
    var query ='MATCH (user:User {username: {thisUsername}}), (other:User {username: {otherUsername}}), (user) -[rel:follows]-> (other) DELETE rel';
 
     var params = {
-        thisUsername: req.body.username,
-        otherUsername: req.body.otherusername,
+        thisUsername: req.query.username,
+        otherUsername: req.query.otherusername,
     };
 
     db.cypher({
@@ -102,7 +127,7 @@ router.post('/createuser', function(req,res) {
         } else {
             res.send({message: "success", error: false});
         }
-        console.log(results);
+        //console.log(results);
     });
 });
 

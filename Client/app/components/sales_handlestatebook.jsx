@@ -10,11 +10,12 @@ var HandleState = React.createClass({
             url: '',
             gioithieu: '',
             giatien: '',
-            xuly: false
+            xuly: false,
+            follow: false
         }
     },
     componentWillMount: function () {
-        var { donhang, dispatch } = this.props;
+        var { donhang, dispatch, nguoidung } = this.props;
         
         axios.get('http://localhost:8080/api/sach', {
             params: {
@@ -30,6 +31,19 @@ var HandleState = React.createClass({
                 })
             }
         }.bind(this))
+
+        axios.get('http://localhost:8083/api/message/checkFollowing', {
+            params: {
+                username: nguoidung.tendangnhap,
+                otherusername: donhang.nguoimua
+            }
+        }).then( function(res) {
+            if (res.data.error == false) {
+                this.setState({
+                    xuly: true
+                })
+            } 
+        })
     },
     handleClick: function() {
         var {dispatch, donhang, nguoidung} = this.props;
@@ -45,10 +59,45 @@ var HandleState = React.createClass({
             }
         }.bind(this))
     },
+    handleFollow: function() {
+        var {nguoidung, donhang} = this.props;
+         axios.post('http://localhost:8083/api/message/follow', {
+            username: nguoidung.tendangnhap,
+            otherusername: donhang.nguoimua
+        }).then(function(res) {
+            if(res.data.error == false) {
+               this.setState({
+                   follow: true
+               })
+            }
+        })
+    },
+    handleUnFollow: function() {
+        var {nguoidung, donhang} = this.props;
+        axios.delete('http://localhost:8083/api/message/unfollow', {
+            params: {
+               username: nguoidung.tendangnhap,
+               otherusername: donhang.nguoimua
+            }
+        }).then(function(res) {
+            if(res.data.error == false) {
+                this.setState({
+                    follow: false
+                })
+            }
+        })
+    },
     render: function() {
-        var {donhang, dispatch} = this.props;
-        var { tenSach , url, gioithieu, xuly, giatien} = this.state;
+        var {donhang, dispatch, nguoidung} = this.props;
+        var { tenSach , url, gioithieu, xuly, giatien,follow} = this.state;
         var that = this;
+        var hienThiFollow = function() {
+            if (follow == false ) {
+                <button className="button" onClick={that.handleFollow}>Theo dõi</button>
+            } else {
+                <button className="button" onClick={that.handleUnFollow}>Hủy theo dõi</button>
+            }
+        }
         var hienThiButton = function() {
             if (donhang.trangthai == 0 && xuly == false) {
                 return <button className="button" onClick={that.handleClick}>Giao hàng</button>

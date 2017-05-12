@@ -16,6 +16,7 @@ var Sales_checkstatebook = require('sales_checkstatebook');
 var Sales_uploadbook = require('sales_uploadbook');
 var Admin = require('adminDanhMuc');
 var TrangThaiDonHangKH = require('TrangThaiDonHangKH');
+var Sales_following = require('sales_Following');
 
 require('style!css!foundation-sites/dist/css/foundation.min.css');
 $(document).foundation();
@@ -44,6 +45,7 @@ ReactDOM.render(
                     <IndexRoute component={Sales_checkbook}/>
                     <Route path="/sales/checkstatebook" component={Sales_checkstatebook} />
                     <Route path="/sales/uploadbook" component={Sales_uploadbook} />
+                    <Route path="/sales/following" component={Sales_following} />
                </Route>
                <Route path="/admin" component={Admin}/>
             </Route>

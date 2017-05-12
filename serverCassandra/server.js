@@ -14,16 +14,16 @@ var config = {
         port: 9042
     },
     socketOptions: {
-        connectTimeout: 170000
+        connectTimeout: 210000
     }
 }
 
 
-waitForCass.await(config, 180000, true)
+waitForCass.await(config, 220000, true)
     .then(function (result) {
         var createKS = "CREATE KEYSPACE IF NOT EXISTS  bookstore WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };";
         var useKS = "USE bookstore;"
-        var createTB = "CREATE TABLE IF NOT EXISTS giohang (giohang_id text ,nguoimua varchar,diachi varchar, masach varchar, trangthai varchar, PRIMARY KEY (giohang_id, nguoimua, sohuu) );";
+        var createTB = "CREATE TABLE IF NOT EXISTS giohang (giohang_id text ,nguoimua varchar,diachi varchar, masach varchar, trangthai varchar,sohuu varchar, PRIMARY KEY (giohang_id, nguoimua, sohuu) );";
 
         var client = new cassandra.Client({ contactPoints: ['cassandradb'] });
         client.connect(function (err, result) {

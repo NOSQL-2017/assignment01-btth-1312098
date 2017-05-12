@@ -198,3 +198,18 @@ export var dathangReducer = (state = {dsDonDatHangKH: [], dsDonDatHangNB: []}, a
             return state;
     }
 }
+
+
+// ---- message -----//
+
+export var messageReducer = (state= {dsTheoDoi: []}, action) => {
+    switch(action.type) {
+        case 'LAY_DS_THEO_DOI_TC':
+            return {
+                ...state,
+                dsTheoDoi: action.dsTheoDoi
+            }
+        default: 
+            return state;
+    }
+}

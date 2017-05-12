@@ -1,0 +1,19 @@
+{
+  "name": "neo4japi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "neo4j": "^2.0.0-RC2",
+    "node-uuid": "^1.4.8"
+  }
+}

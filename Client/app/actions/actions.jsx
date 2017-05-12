@@ -256,6 +256,7 @@ export var dangky = (tendangnhap, hoten, email, matkhau, chucvu) => {
             chucvu
         }).then(function (res) {
             if (res.data.error == false) { 
+                taoNodeUser(tendangnhap);
                 dispatch(dangkythanhcong(tendangnhap));
             } else {
                 console.log('failed');
@@ -469,6 +470,85 @@ export var themDanhMuc = (madanhmuc,tendanhmuc) => {
             if (res.data.error == false) {
                 console.log('them thanh cong');
                 dispatch(layDanhMuc());
+            }
+        })
+    }
+}
+
+// follow and unfollow
+
+export var theoDoiTC = () => {
+    return {
+        type: "THEO_DOI_TC"
+    }
+}
+
+export var theoDoi = (nguoiban, nguoimua) => {
+    return (dispatch, getState) => {
+
+        axios.post('http://localhost:8083/api/message/follow', {
+            username: nguoiban,
+            otherusername: nguoimua
+        }).then(function(res) {
+            if(res.data.error == false) {
+                dispatch(theoDoiTC());
+            }
+        })
+    }
+}
+
+export var huyTheoDoiTC = () => {
+    return {
+        type: "HUY_THEO_DOI_TC"
+    }
+}
+
+export var huyTheoDoi = (nguoiban, nguoimua) => {
+    return (dispatch, getState) => {
+        axios.delete('http://localhost:8083/api/message/unfollow', {
+            params: {
+                username: nguoiban,
+                otherusername: nguoimua
+            }
+        }).then(function(res) {
+            if(res.data.error == false) {
+                dispatch(huyTheoDoiTC());
+            }
+        })
+    }
+}
+
+export var taoNodeUser = (username) => {
+    
+    return (dispatch, getState) => {
+        axios.post('http://localhost:8083/api/message/createuser', {
+            username
+        }).then(function(res) {
+            if (res.data.error == false) {
+                console.log("Tao node thanh cong.");
+            }
+        })
+    }
+}
+
+export var layDsTheoDoiTc = (dsTheoDoi) => {
+    return {
+        type: "LAY_DS_THEO_DOI_TC",
+        dsTheoDoi
+    }
+}
+
+
+export var layDsTheoDoi = (username) => {
+
+    return (dispatch, getState) => {
+        axios.get('http://localhost:8083/api/message/createuser', {
+            params: {
+                username
+            }
+        }).then(function(res) {
+            if (res.data.error == false) {
+                dispatch(layDsTheoDoiTC(res.data.dsTheoDoi))
             }
         })
     }

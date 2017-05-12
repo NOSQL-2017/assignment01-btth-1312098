@@ -1,5 +1,5 @@
 var redux = require('redux');
-var {dathangReducer, danhMucReducer,ownerBookReducer, usersReducer, bookReducer} = require('reducers');
+var {dathangReducer, danhMucReducer,ownerBookReducer, usersReducer, bookReducer,messageReducer} = require('reducers');
 var thunk = require('redux-thunk').default;
 
 export var configure = () => {
@@ -8,7 +8,8 @@ export var configure = () => {
         nguoidung: usersReducer,
         dsSach: bookReducer,
         danhmuc: danhMucReducer,
-        dathang: dathangReducer
+        dathang: dathangReducer,
+        message: messageReducer
     });
 
     var store = redux.createStore(reducer,redux.applyMiddleware(thunk));

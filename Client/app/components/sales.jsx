@@ -14,6 +14,7 @@ var Sales = React.createClass({
                                 <Link to="/sales">Sách đã đăng</Link>
                                 <Link to="/sales/uploadbook">Đăng sách</Link>
                                 <Link to="/sales/checkstatebook">Kiếm tra đơn hàng</Link>
+                                <Link to="/sales/following">Theo dõi</Link>
                             </div>
                         </div>
                     </div>

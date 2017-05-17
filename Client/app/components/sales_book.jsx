@@ -73,13 +73,13 @@ var Book = React.createClass({
         return (
             <div>
                 
-                <div className="column large-5">
+                <div className="column large-4">
                     <div className="message">
                         {thongBao()}
                     </div>
                     <div className="product-card ">
                         <div className="product-card-thumbnail">
-                            <img  src={url} />
+                            <a href="#"><img  src={url} /></a>
                         </div>
                         <h2 className="product-card-title"><a>Thông tin sách</a></h2>
                         <input ref="tensach" type="text" placeholder="Tên sách"/>

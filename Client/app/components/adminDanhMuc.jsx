@@ -42,7 +42,7 @@ var adminDanhMuc = React.createClass({
                             <p><input type="submit" className="button expanded" value="Thêm danh mục"></input></p>
                         </form>
                     </div>
-                    <div className="column large-6">
+                    <div className="column large-4 dmhienco" >
                         <h4 className="text-center">Danh mục hiện có</h4>
                         {hienThiDanhMuc()}
                     </div>

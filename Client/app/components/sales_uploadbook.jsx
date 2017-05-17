@@ -23,7 +23,7 @@ var Sales_uploadbook = React.createClass({
 
         var renderBook  = () => {
             if(nguoiban.danhSachAnh.length === 0) {
-                return ( <p>Nothing to show</p>)
+                return ( <p>Bạn chưa tải lên sách nào.</p>)
             }
             return (
                  nguoiban.danhSachAnh.map((book, k) => {
@@ -58,7 +58,7 @@ var Sales_uploadbook = React.createClass({
                 <div className="row">
                     <div className="row">
                          <div className="uploadimages column">
-                            <h3>Upload Images</h3>
+                            <h3>Đăng sách</h3>
                             <Dropzone onDrop={this.uploadFile} className="dropzone">
                                 <button className="button radius">Bấm vào đây để tải ảnh sách lên</button>
                             </Dropzone>

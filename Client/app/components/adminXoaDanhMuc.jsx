@@ -11,9 +11,9 @@ var xoaDanhMuc = React.createClass({
     render: function() {
         var {dm, dispatch} = this.props;
         return (
-            <div>
-                    <p>{dm.tendanhmuc} <button className="button" onClick={this.handleClick}>Xoa</button></p>
-                    
+            <div className="dmcon">
+                    <h5>{dm.tendanhmuc} </h5>
+                    <button className="button" onClick={this.handleClick}>Xóa</button>
             </div>
         )
     }

@@ -38,8 +38,6 @@ services:
       - ./serverapi:/usr/src/BTTH/serverapi
     links:
       - db1
-    depends_on:
-      - "db1"
     command: ["./wait-for-it.sh", "db1:5432","--", "node server.js"]
   webmgdbth:
     build: ./serverMongoDB
@@ -49,8 +47,6 @@ services:
       - ./serverMongoDB:/usr/src/BTTH/serverMongoDB
     links:
       - mgdb
-    depends_on:
-      - "mgdb"
     command: ["./wait-for-it.sh", "mgdb:27017","--", "node server.js"]
   webcsdradb:
     build: ./serverCassandra
@@ -60,8 +56,6 @@ services:
       - ./serverCassandra:/usr/src/BTTH/serverCassandra
     links:
       - cassandradb
-    depends_on:
-      - "cassandradb"
   webneodb: 
     build: ./serverNeo4j
     ports:
@@ -70,6 +64,4 @@ services:
       - ./serverNeo4j:/usr/src/BTTH/serverNeo4j
     links:
       - neodb
-    depends_on:
-      - "neodb"
     command: ["./wait-for-it.sh", "neodb:7474","--", "node server.js"]

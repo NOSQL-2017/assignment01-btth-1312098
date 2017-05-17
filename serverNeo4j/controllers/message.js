@@ -61,19 +61,21 @@ router.get('/checkfollowing', function (req, res) {
 })
 
 router.delete('/unfollow', function (req, res) {
-   var query ='MATCH (user:User {username: {thisUsername}}), (other:User {username: {otherUsername}}), (user) -[rel:follows]-> (other) DELETE rel';
+   var query ='MATCH (user:User {username: {thisUsername}}), (other:User {username: {otherUsername}}), (user)-[rel:follows]->(other) DELETE rel';
 
     var params = {
         thisUsername: req.query.username,
         otherUsername: req.query.otherusername,
     };
 
+    console.log(params);
     db.cypher({
         query: query,
         params: params,
     }, function (err) {
         if (!err) {
-            res.send({message: "success", error: false});
+            console.log('thanh cong');
+            res.send({message: "Success", error: false});
         } else {
             console.log("unfollow:", err);
             res.send({message: "Success", error: true});
@@ -97,7 +99,7 @@ router.post('/follow', function (req, res) {
         if (!err) {
             res.send({message: "success", error: false});
         } else {
-             console.log("follow:", err);
+            console.log("follow:", err);
             res.send({message: "Success", error: true});
         }
     });

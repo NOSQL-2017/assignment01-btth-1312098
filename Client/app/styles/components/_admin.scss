@@ -10,4 +10,25 @@
             font-weight: 600;
         }
     }
+
+    .dmhienco {
+        background: #fbfbfb;
+        border: 1px solid #ccd4d5;
+
+        .dmcon {
+            display: inline-block;
+            width: 80%;
+            margin: 10px 0 5px 50px;
+            background-color: #dfe4e4;
+
+            h5{
+                float: left;
+                margin: 15px;
+            }
+            button {
+                float: right;
+                margin: 10px;
+            }
+        }
+    }
 }

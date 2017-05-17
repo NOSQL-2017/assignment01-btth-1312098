@@ -21,7 +21,7 @@ var detailproduct = React.createClass({
     render: function () {
         var {book} = this.props
         return (
-            <div className="details">
+            <div className="column large-4">
                 <div className="product-card">
                     <div className="">
                         <img src={book.url} />

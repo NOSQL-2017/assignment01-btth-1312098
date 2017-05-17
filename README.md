@@ -25,7 +25,7 @@ Công nghệ sử dụng (tự động thêm nếu phần mình dùng không đ�
 * [x] Mongodb
 * [ ] Redis
 * [x] Cassandra
-* [ ] Neo4j
+* [x] Neo4j
 * [x] React + Redux
 
 Yêu cầu **bắt buộc**
@@ -41,13 +41,16 @@ Yêu cầu **không bắt buộc**
 * [ ] Quản lý session trong 1 CSDL riêng bằng redis
 * [x] Quản lý danh mục sản phẩm trong 1 CSDL riêng bằng MongoDB
 * [x] Quản lý giỏ hàng trong 1 CSDL riêng bằng Cassandra
+* [x] Người bán follow người mua sử dụng csdl Neo4j
 * [ ] Quản lý người mua và người bán follow, gửi tin nhắn với nhau và lưu trong CSDL riêng bằng Neo4j
 
 Các **chức năng của demo** đã thực hiện hoặc dự kiến thực hiện. Nhóm check vào các chức năng đã làm
 * [ ] Chức năng 1
 * [ ] Chức năng 2
 
-Lưu ý khi chạy code: Vì em set code khởi tạo Bảng của Cassandra sau 180s nên phải đợi thông báo kết nối Cassandra thành công thì mơi thực hiện được với gio hàng.
+## Lưu ý : 
+* Sau lần chạy đầu tiên phải chạy lại 2 web api cassandra, web api postgres.
+* Admin sẽ được tự thêm vào database với tên đăng nhập và mật khẩu là admin.
 
 ## Demo
 

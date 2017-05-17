@@ -5,108 +5,103 @@
     .column:last-child:not(:first-child), .columns:last-child:not(:first-child) {
         float: left;
     }
-    display: inline-block;
-    .details {
-        float: left;
-        text-align: center;
-        display: block;
-        height: 30%;
-        width: 30%;
-        margin: 5px;
-    }
-    .product-card {
-    background-color: #fefefe;
-    border: 1px solid #e6e6e6;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    }
+    margin-left: 10px;
+   
+    
+.product-card {
+  background-color: #fefefe;
+  border: 1px solid #e6e6e6;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
 
-    .product-card-thumbnail {
-    display: block;
-    position: relative;
-    }
+.product-card-thumbnail {
+  display: block;
+  position: relative;
+}
 
-    .product-card-title {
-    font-family: 'Open sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    line-height: 1.45rem;
-    margin-top: 1rem;
-    margin-bottom: 0;
-    }
+.product-card-title {
+  font-family: 'Open sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.45rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
 
-    .product-card-desc {
-    color: #8a8a8a;
-    display: block;
-    font-family: 'Open sans', sans-serif;
-    font-size: 0.85rem;
-    }
+.product-card-desc {
+  color: #8a8a8a;
+  display: block;
+  font-family: 'Open sans', sans-serif;
+  font-size: 0.85rem;
+}
 
-    .product-card-price {
-    color: #3e3e3e;
-    display: inline-block;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-top: 0.8rem;
-    }
+.product-card-price {
+  color: #3e3e3e;
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.8rem;
+}
 
-    .product-card-sale {
-    color: #cacaca;
-    display: inline-block;
-    font-size: 0.85rem;
-    margin-left: 0.3rem;
-    text-decoration: line-through;
-    }
+.product-card-sale {
+  color: #cacaca;
+  display: inline-block;
+  font-size: 0.85rem;
+  margin-left: 0.3rem;
+  text-decoration: line-through;
+}
 
-    .product-card-colors {
-    display: block;
-    margin-top: 0.8rem;
-    }
+.product-card-colors {
+  display: block;
+  margin-top: 0.8rem;
+}
 
-    .product-card-color-option {
-    display: inline-block;
-    height: 25px;
-    width: 25px;
-    }
+.product-card-color-option {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+}
+
 
 
     
     .button-hover-addcart {
-    border: 2px solid #767676;
-    background: transparent;
-    color: #767676;
-    text-transform: uppercase;
-    overflow: hidden;
-    letter-spacing: 0.07rem;
-    transition: all 0.2s ease-in-out;
-    position: relative;
+        border: 2px solid #767676;
+        background: transparent;
+        color: #767676;
+        text-transform: uppercase;
+        overflow: hidden;
+        letter-spacing: 0.07rem;
+        transition: all 0.2s ease-in-out;
+        position: relative;
     }
 
     .button-hover-addcart span {
-    transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
     }
 
     .button-hover-addcart .ion-ios-cart-outline {
-    position: absolute;
-    font-size: 1.2rem;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-            transform: translateY(-50%);
-    color: #1779ba;
-    right: -20px;
-    transition: 0.4s right cubic-bezier(0.38, 0.6, 0.48, 1);
+        position: absolute;
+        font-size: 1.2rem;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
+        color: #1779ba;
+        right: -20px;
+        transition: 0.4s right cubic-bezier(0.38, 0.6, 0.48, 1);
     }
 
     .button-hover-addcart:hover {
-    border-color: #1779ba;
-    background: transparent;
-    transition: border-color 0.2s;
+        border-color: #1779ba;
+        background: transparent;
+        transition: border-color 0.2s;
     }
 
     .button-hover-addcart:hover span {
-    margin-right: 20px;
-    color: #1779ba;
+        margin-right: 20px;
+        color: #1779ba;
     }
 
     .button-hover-addcart:hover .ion-ios-cart-outlinea {

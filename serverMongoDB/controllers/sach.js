@@ -7,11 +7,7 @@ var danhMuc = require('../models/danhmuc');
 
 
 var uriString =  'mongodb://mgdb:27017';
-mongoose.connect(uriString, function(err) {
-    // if (err) {
-    //     console.log("error", err);
-    // }
-});
+mongoose.connect(uriString, function(err) {});
         
     router.get('/', function(req, res) {
         var masach = req.query.masach;

@@ -44,13 +44,11 @@ Yêu cầu **không bắt buộc**
 * [x] Người bán follow người mua sử dụng csdl Neo4j
 * [ ] Quản lý người mua và người bán follow, gửi tin nhắn với nhau và lưu trong CSDL riêng bằng Neo4j
 
-Các **chức năng của demo** đã thực hiện hoặc dự kiến thực hiện. Nhóm check vào các chức năng đã làm
-* [ ] Chức năng 1
-* [ ] Chức năng 2
 
 ## Lưu ý : 
 * Sau lần chạy đầu tiên phải chạy lại 2 web api cassandra, web api postgres.
 * Admin sẽ được tự thêm vào database với tên đăng nhập và mật khẩu là admin.
+* Gif do máy em yếu quá nên không thực hiện được.
 
 ## Demo
 
